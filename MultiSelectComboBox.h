@@ -17,6 +17,7 @@ public:
     void SetSearchBarPlaceHolderText(const QString& aPlaceHolderText);
     void SetPlaceHolderText(const QString& aPlaceHolderText);
     void ResetSelection();
+    QVector<QVariant> currentData;
 
 signals:
     void selectionChanged();

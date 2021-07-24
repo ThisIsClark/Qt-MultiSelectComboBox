@@ -50,40 +50,45 @@ void MultiSelectComboBox::hidePopup()
 void MultiSelectComboBox::stateChanged(int aState)
 {
     Q_UNUSED(aState);
-    QString selectedData("");
+    QString selectedText("");
+    QVector<QVariant> selectedData;
     int count = mListWidget->count();
 
     for (int i = 1; i < count; ++i)
     {
-        QWidget *widget = mListWidget->itemWidget(mListWidget->item(i));
+        QListWidgetItem *listWidgetItem = mListWidget->item(i);
+        QWidget *widget = mListWidget->itemWidget(listWidgetItem);
         QCheckBox *checkBox = static_cast<QCheckBox *>(widget);
 
         if (checkBox->isChecked())
         {
-            selectedData.append(checkBox->text()).append(";");
+            selectedText.append(checkBox->text()).append(";");
+            selectedData.append(listWidgetItem->data(Qt::UserRole));
         }
     }
-    if (selectedData.endsWith(";"))
+    if (selectedText.endsWith(";"))
     {
-        selectedData.remove(selectedData.count() - 1, 1);
+        selectedText.remove(selectedText.count() - 1, 1);
     }
-    if (!selectedData.isEmpty())
+    if (!selectedText.isEmpty())
     {
-        mLineEdit->setText(selectedData);
+        mLineEdit->setText(selectedText);
+        currentData = selectedData;
     }
     else
     {
         mLineEdit->clear();
+        currentData.clear();
     }
 
-    mLineEdit->setToolTip(selectedData);
+    mLineEdit->setToolTip(selectedText);
     emit selectionChanged();
 }
 
 void MultiSelectComboBox::addItem(const QString& aText, const QVariant& aUserData)
 {
-    Q_UNUSED(aUserData);
     QListWidgetItem* listWidgetItem = new QListWidgetItem(mListWidget);
+    listWidgetItem->setData(Qt::UserRole, aUserData);
     QCheckBox* checkBox = new QCheckBox(this);
     checkBox->setText(aText);
     mListWidget->addItem(listWidgetItem);
