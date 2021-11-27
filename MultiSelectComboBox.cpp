@@ -43,6 +43,7 @@ void MultiSelectComboBox::hidePopup()
     }
     else
     {
+        this->view()->scrollToTop();
         QComboBox::hidePopup();
     }
 }
