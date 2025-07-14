@@ -7,3 +7,10 @@ Here is the demo:<br>
 2. Add a default combo box in Qt Designer.
 3. Right click this combo box to promote it to MultiSelectComboBox.
 4. Now you can use this MultiSelectComboBox in your code.
+
+## ❤ Enjoying this project?
+If this tool saves you time or makes your work easier, consider supporting its development. Scan the QR code below to buy me a coffee! Your encouragement keeps this project alive and updated.
+
+![receive](https://github.com/user-attachments/assets/0b1acfe9-c72a-4456-9c36-a41b6c213fe3)
+
+Thank you for using *MultiSelectComboBox* — whether you sponsor or not!
